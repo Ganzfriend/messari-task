@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import styles from "../styles/Home.module.css";
 import getTimeSeries from "../helpers/getTimeSeries";
-import BarChart from "./barChart";
+import Chart from "./chart";
 
 const Home: NextPage = () => {
   const [timeSeriesData, setTimeSeriesData] = useState();
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         {/* <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.status)}</div>
         <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.data)}</div> */}
 
-        <BarChart />
+        <Chart />
 
         {/* <p className={styles.description}>
           Get started by editing{" "}

@@ -1,4 +1,4 @@
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import type { NextPage } from "next";
 
 const data: Object = {
@@ -28,9 +28,9 @@ const data: Object = {
   ],
 };
 
-const BarChart: NextPage = () => (
+const Chart: NextPage = () => (
   <div>
-    <Bar
+    <Line
       data={data}
       width={400}
       height={200}
@@ -41,4 +41,4 @@ const BarChart: NextPage = () => (
   </div>
 );
 
-export default BarChart;
+export default Chart;
