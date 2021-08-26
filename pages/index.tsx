@@ -1,15 +1,26 @@
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+
 import styles from "../styles/Home.module.css";
+import getTimeSeries from "../helpers/getTimeSeries";
+import BarChart from "./barChart";
 
 const Home: NextPage = () => {
+  const [timeSeriesData, setTimeSeriesData] = useState();
+
+  useEffect(() => {
+    getTimeSeries(setTimeSeriesData);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Messari Task</title>
-        <meta name="description" content="Messari Front End Coding Task" />
+        <meta name="description" content="Messari Front-End Coding Task" />
         <link rel="icon" href="/favicon-96x96.png" />
+        {/* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> */}
       </Head>
 
       <main className={styles.main}>
@@ -21,6 +32,11 @@ const Home: NextPage = () => {
           width={250}
           src="/Messari_horizontal_white-03.svg"
         />
+
+        {/* <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.status)}</div>
+        <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.data)}</div> */}
+
+        <BarChart />
 
         {/* <p className={styles.description}>
           Get started by editing{" "}
