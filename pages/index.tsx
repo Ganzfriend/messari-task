@@ -51,11 +51,12 @@ const Home: NextPage = () => {
           src="/Messari_horizontal_white-03.svg"
         />
         <div>
-          <FormControl className={styles.selectAsset}>
-            <InputLabel>Asset</InputLabel>
+          <FormControl classes={{ root: styles.selectAsset }}>
+            <InputLabel classes={{ root: styles.selectAssetLabels }}>
+              Asset
+            </InputLabel>
             <Select
-              labelId="select-asset-label"
-              id="select-asset"
+              classes={{ root: styles.selectAssetLabels }}
               value={asset}
               onChange={handleChangeAsset}
             >
@@ -64,11 +65,10 @@ const Home: NextPage = () => {
                   {val}
                 </MenuItem>
               ))}
-              {/* <MenuItem value="yfi">YFI</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
-            <FormHelperText>Explore metrics of other assets</FormHelperText>
+            <FormHelperText classes={{ root: styles.selectAssetLabels }}>
+              Explore metrics of other assets
+            </FormHelperText>
           </FormControl>
         </div>
         <div>{timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}</div>

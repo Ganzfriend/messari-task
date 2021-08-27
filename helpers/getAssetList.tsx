@@ -8,8 +8,8 @@ const getAssetList = (cb: Function) => {
     .then(({ data }) => data)
     .then((res) => {
       const { data } = res;
-      const names = data.map(({ name }) => name);
-      cb(names);
+      const slugs = data.map(({ slug }) => slug);
+      cb(slugs);
     })
     .catch((err) => console.log(err));
 };

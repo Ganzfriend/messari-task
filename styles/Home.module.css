@@ -15,12 +15,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .selectAsset {
-  margin: 3rem;
+  padding: 3rem;
   min-width: 120;
+  background-color: #38404a;
+}
+
+.selectAsset .selectAssetLabels {
+  color: #f3f4f6;
+  padding: 0.5rem;
 }
 
 .chart {
@@ -30,6 +36,10 @@
 
 .chartName {
   color: white;
+}
+
+.logo {
+  margin: 3rem;
 }
 /*
 .footer {
@@ -48,7 +58,7 @@
   flex-grow: 1;
 } */
 
-.title a {
+/* .title a {
   color: #0070f3;
   text-decoration: none;
 }
@@ -68,7 +78,7 @@
 .title,
 .description {
   text-align: center;
-}
+} */
 /*
 .description {
   line-height: 1.5;
@@ -123,10 +133,7 @@
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-  margin-bottom: 5rem;
-}
+
 */
 
 @media (max-width: 600px) {
