@@ -8,7 +8,19 @@ import getTimeSeries from "../helpers/getTimeSeries";
 import Chart from "./chart";
 
 const Home: NextPage = () => {
-  const [timeSeriesData, setTimeSeriesData] = useState({});
+  // interface timeSeriesData {
+  //   data: {
+  //     name: string;
+  //     parameters: {
+  //       start: string;
+  //       end: string;
+  //       interval: string;
+  //     };
+  //     values: Array<number>;
+  //   };
+  // }
+
+  const [timeSeriesData, setTimeSeriesData] = useState(null);
 
   useEffect(() => {
     getTimeSeries(setTimeSeriesData);
@@ -20,7 +32,6 @@ const Home: NextPage = () => {
         <title>Messari Task</title>
         <meta name="description" content="Messari Front-End Coding Task" />
         <link rel="icon" href="/favicon-96x96.png" />
-        {/* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> */}
       </Head>
 
       <main className={styles.main}>
@@ -33,10 +44,7 @@ const Home: NextPage = () => {
           src="/Messari_horizontal_white-03.svg"
         />
 
-        {/* <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.status)}</div>
-        <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.data)}</div> */}
-
-        <Chart timeSeriesData={timeSeriesData} />
+        {timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}
 
         {/* <p className={styles.description}>
           Get started by editing{" "}
