@@ -8,7 +8,7 @@ import getTimeSeries from "../helpers/getTimeSeries";
 import Chart from "./chart";
 
 const Home: NextPage = () => {
-  const [timeSeriesData, setTimeSeriesData] = useState();
+  const [timeSeriesData, setTimeSeriesData] = useState({});
 
   useEffect(() => {
     getTimeSeries(setTimeSeriesData);
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         {/* <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.status)}</div>
         <div>{!!timeSeriesData && JSON.stringify(timeSeriesData.data)}</div> */}
 
-        <Chart />
+        <Chart timeSeriesData={timeSeriesData} />
 
         {/* <p className={styles.description}>
           Get started by editing{" "}
