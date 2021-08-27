@@ -1,30 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 
+import {
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+  FormControl,
+  Select,
+} from "@material-ui/core";
+
 import styles from "../styles/Home.module.css";
 import getTimeSeries from "../helpers/getTimeSeries";
+import getMetrics from "../helpers/getMetrics";
+import getAssetList from "../helpers/getAssetList";
 import Chart from "./chart";
 
 const Home: NextPage = () => {
-  // interface timeSeriesData {
-  //   data: {
-  //     name: string;
-  //     parameters: {
-  //       start: string;
-  //       end: string;
-  //       interval: string;
-  //     };
-  //     values: Array<number>;
-  //   };
-  // }
-
   const [timeSeriesData, setTimeSeriesData] = useState(null);
+  const [assetMetrics, setAssetMetrics] = useState(null);
+  const [assetList, setAssetList] = useState(null);
+
+  const [asset, setAsset] = useState("yfi");
+
+  const handleChangeAsset = (event: ChangeEvent<{ value: unknown }>) => {
+    setAsset(event.target.value as string);
+  };
 
   useEffect(() => {
-    getTimeSeries(setTimeSeriesData);
-  }, []);
+    getTimeSeries(asset, setTimeSeriesData);
+    getMetrics(asset, setAssetMetrics);
+    getAssetList(setAssetList);
+  }, [asset]);
 
   return (
     <div className={styles.container}>
@@ -35,51 +43,35 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {/* <h1 className={styles.title}>
-        </h1> */}
         <Image
           alt="Messari logo"
           height={80}
           width={250}
+          className={styles.logo}
           src="/Messari_horizontal_white-03.svg"
         />
-
-        {timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}
-
-        {/* <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div> */}
+        <div>
+          <FormControl className={styles.selectAsset}>
+            <InputLabel>Asset</InputLabel>
+            <Select
+              labelId="select-asset-label"
+              id="select-asset"
+              value={asset}
+              onChange={handleChangeAsset}
+            >
+              {assetList?.map((val: string) => (
+                <MenuItem key={val} value={val.toLowerCase()}>
+                  {val}
+                </MenuItem>
+              ))}
+              {/* <MenuItem value="yfi">YFI</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem> */}
+            </Select>
+            <FormHelperText>Explore metrics of other assets</FormHelperText>
+          </FormControl>
+        </div>
+        <div>{timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}</div>
       </main>
 
       {/* <footer className={styles.footer}>

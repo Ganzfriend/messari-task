@@ -91,6 +91,7 @@ const Chart: FC<ComponentProps> = ({ timeSeriesData }) => {
 
   return (
     <div className={styles.chart}>
+      <h1 className={styles.chartName}>{name}</h1>
       <Line
         data={formattedData}
         width={400}
