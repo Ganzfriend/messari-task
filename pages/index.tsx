@@ -15,15 +15,17 @@ import MetricsTable from "./metricsTable";
 
 debug re-render 4 times situation (probably has to do with useEffect)
 
+figure out how passing async props works with TypeScript
+
 convert large numbers to legible string
 
 make styling dynamic for different screen sizes
 
 fix metrics table height
 
-add more data to metrics table
+add more data to metrics table from API
 
-use paging rather than asset in state in order to change asset?
+use paging rather than asset in state in order to change asset
 
 */
 const Home: NextPage = () => {
