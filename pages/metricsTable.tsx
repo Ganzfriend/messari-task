@@ -1,4 +1,5 @@
 import { useState, MouseEvent, ChangeEvent } from "react";
+import moment from "moment";
 import {
   makeStyles,
   useTheme,
@@ -101,32 +102,6 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-// function createData(name: string, calories: number, fat: number) {
-//   return { name, calories, fat };
-// }
-
-// const rows = [
-//   createData("Cupcake", 305, 3.7),
-//   createData("Donut", 452, 25.0),
-//   createData("Eclair", 262, 16.0),
-//   createData("Frozen yoghurt", 159, 6.0),
-//   createData("Gingerbread", 356, 16.0),
-//   createData("Honeycomb", 408, 3.2),
-//   createData("Ice cream sandwich", 237, 9.0),
-//   createData("Jelly Bean", 375, 0.0),
-//   createData("KitKat", 518, 26.0),
-//   createData("Lollipop", 392, 0.2),
-//   createData("Marshmallow", 318, 0),
-//   createData("Nougat", 360, 19.0),
-//   createData("Oreo", 437, 18.0),
-// ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
-// const useStyles2 = makeStyles({
-//   table: {
-//     minWidth: 500,
-//   },
-// });
-
 export default function MetricsTable({ assetMetrics }) {
   const { data } = assetMetrics;
   const { market_data, cycle_low, roi_data } = data;
@@ -157,31 +132,31 @@ export default function MetricsTable({ assetMetrics }) {
   const rows = [
     {
       name: "PRICE USD",
-      stat: price_usd,
+      stat: "$ " + price_usd.toFixed(2),
     },
     {
       name: "CHANGE VS USD (24H)",
-      stat: percent_change_usd_last_24_hours,
+      stat: percent_change_usd_last_24_hours.toFixed(2) + " %",
     },
     {
       name: "CHANGE VS USD (1Y)",
-      stat: percent_change_last_1_year,
+      stat: percent_change_last_1_year.toFixed(2) + " %",
     },
     {
       name: "CHANGE VS USD (YTD)",
-      stat: percent_change_year_to_date,
+      stat: percent_change_year_to_date.toFixed(2) + " %",
     },
     {
       name: "REAL VOLUME (24H)",
-      stat: real_volume_last_24_hours,
+      stat: "$ " + real_volume_last_24_hours.toFixed(2),
     },
     {
       name: "VOLUME (24H)",
-      stat: volume_last_24_hours,
+      stat: "$ " + volume_last_24_hours.toFixed(2),
     },
     {
       name: "LAST TRADE",
-      stat: last_trade_at,
+      stat: moment(last_trade_at).format("lll"),
     },
     {
       name: "CYCLE LOW (USD)",
@@ -189,27 +164,27 @@ export default function MetricsTable({ assetMetrics }) {
     },
     {
       name: "PRICE BTC",
-      stat: price_btc,
+      stat: "$ " + price_btc.toFixed(2),
     },
     {
       name: "CHANGE VS BTC (24H)",
-      stat: percent_change_btc_last_24_hours,
+      stat: percent_change_btc_last_24_hours.toFixed(2) + " %",
     },
     {
       name: "CHANGE VS BTC (1Y)",
-      stat: percent_change_btc_last_1_year,
+      stat: percent_change_btc_last_1_year.toFixed(2) + " %",
     },
     {
       name: "PRICE ETH",
-      stat: price_eth,
+      stat: "$ " + price_eth.toFixed(2),
     },
     {
       name: "CHANGE VS ETH (24H)",
-      stat: percent_change_eth_last_24_hours,
+      stat: percent_change_eth_last_24_hours.toFixed(2) + " %",
     },
     {
       name: "CHANGE VS ETH (1Y)",
-      stat: percent_change_eth_last_1_year,
+      stat: percent_change_eth_last_1_year.toFixed(2) + " %",
     },
   ];
 
@@ -231,7 +206,7 @@ export default function MetricsTable({ assetMetrics }) {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} classes={{ root: styles.metricsTable }}>
       <Table className={styles.metricsTable} aria-label="metrics table">
         <TableBody>
           {(rowsPerPage > 0
@@ -239,24 +214,41 @@ export default function MetricsTable({ assetMetrics }) {
             : rows
           ).map(({ name, stat }) => (
             <TableRow key={name}>
-              <TableCell component="th" scope="row">
+              <TableCell
+                classes={{ root: styles.metricsTableCell }}
+                component="th"
+                scope="row"
+              >
                 {name}
               </TableCell>
-              <TableCell style={{ width: 50 }} align="right">
+              <TableCell
+                classes={{ root: styles.metricsTableCell }}
+                style={{ width: 50 }}
+                align="right"
+              >
                 {stat}
               </TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell
+                classes={{ root: styles.metricsTableCell }}
+                colSpan={6}
+              />
             </TableRow>
           )}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+              classes={{ root: styles.metricsTableCell }}
+              rowsPerPageOptions={[
+                5,
+                10,
+                Math.floor(rows.length / 2 + rows.length / 2.5),
+                { label: "All", value: -1 },
+              ]}
               colSpan={3}
               count={rows.length}
               rowsPerPage={rowsPerPage}
