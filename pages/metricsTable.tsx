@@ -102,7 +102,35 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function MetricsTable({ assetMetrics }) {
+interface MetricsTableProps {
+  assetMetrics: {
+    data: {
+      market_data: {
+        last_trade_at: string;
+        price_usd: number;
+        price_eth: number;
+        price_btc: number;
+        volume_last_24_hours: number;
+        real_volume_last_24_hours: number;
+        percent_change_btc_last_24_hours: number;
+        percent_change_eth_last_24_hours: number;
+        percent_change_usd_last_24_hours: number;
+      };
+      cycle_low: {
+        price: number;
+      };
+      roi_data: {
+        percent_change_btc_last_1_year: number;
+        percent_change_eth_last_1_year: number;
+        percent_change_last_1_year: number;
+        percent_change_year_to_date: number;
+      };
+    };
+  };
+}
+
+export default function MetricsTable(props: MetricsTableProps) {
+  const { assetMetrics } = props;
   const { data } = assetMetrics;
   const { market_data, cycle_low, roi_data } = data;
   const {

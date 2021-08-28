@@ -1,11 +1,9 @@
 # Getting Started
 
-First, run the development server:
+Fork and clone repo
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+CD into repo and run `npm install`
+
+Run `npm run dev` OR `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

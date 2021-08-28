@@ -21,8 +21,6 @@ make styling dynamic for different screen sizes
 
 fix metrics table height
 
-clean up consts not assigned a type
-
 add more data to metrics table
 
 use paging rather than asset in state in order to change asset?
