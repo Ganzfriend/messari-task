@@ -147,14 +147,71 @@ export default function MetricsTable({ assetMetrics }) {
   const {
     percent_change_btc_last_1_year,
     percent_change_eth_last_1_year,
-    ercent_change_last_1_year,
+    percent_change_last_1_year,
     percent_change_year_to_date,
   } = roi_data;
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const rows = [];
+  const rows = [
+    {
+      name: "PRICE USD",
+      stat: price_usd,
+    },
+    {
+      name: "CHANGE VS USD (24H)",
+      stat: percent_change_usd_last_24_hours,
+    },
+    {
+      name: "CHANGE VS USD (1Y)",
+      stat: percent_change_last_1_year,
+    },
+    {
+      name: "CHANGE VS USD (YTD)",
+      stat: percent_change_year_to_date,
+    },
+    {
+      name: "REAL VOLUME (24H)",
+      stat: real_volume_last_24_hours,
+    },
+    {
+      name: "VOLUME (24H)",
+      stat: volume_last_24_hours,
+    },
+    {
+      name: "LAST TRADE",
+      stat: last_trade_at,
+    },
+    {
+      name: "CYCLE LOW (USD)",
+      stat: price,
+    },
+    {
+      name: "PRICE BTC",
+      stat: price_btc,
+    },
+    {
+      name: "CHANGE VS BTC (24H)",
+      stat: percent_change_btc_last_24_hours,
+    },
+    {
+      name: "CHANGE VS BTC (1Y)",
+      stat: percent_change_btc_last_1_year,
+    },
+    {
+      name: "PRICE ETH",
+      stat: price_eth,
+    },
+    {
+      name: "CHANGE VS ETH (24H)",
+      stat: percent_change_eth_last_24_hours,
+    },
+    {
+      name: "CHANGE VS ETH (1Y)",
+      stat: percent_change_eth_last_1_year,
+    },
+  ];
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -180,16 +237,13 @@ export default function MetricsTable({ assetMetrics }) {
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
-            <TableRow key={row.name}>
+          ).map(({ name, stat }) => (
+            <TableRow key={name}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
+              <TableCell style={{ width: 50 }} align="right">
+                {stat}
               </TableCell>
             </TableRow>
           ))}

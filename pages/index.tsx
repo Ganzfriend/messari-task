@@ -43,7 +43,6 @@ const Home: NextPage = () => {
     getAssetList(setAssetList);
   }, [asset]);
 
-  console.log("##index assetMetrics", assetMetrics);
   return (
     <div className={styles.container}>
       <Head>
