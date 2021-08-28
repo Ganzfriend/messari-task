@@ -13,15 +13,20 @@ import MetricsTable from "./metricsTable";
 
 /* TODO:
 
+debug re-render 4 times situation (probably has to do with useEffect)
+
 convert large numbers to legible string
 
 make styling dynamic for different screen sizes
 
+fix metrics table height
+
+clean up consts not assigned a type
+
 add more data to metrics table
 
-debug re-render 4 times situation (probably has to do with useEffect)
-
 use paging rather than asset in state in order to change asset?
+
 */
 const Home: NextPage = () => {
   const [timeSeriesData, setTimeSeriesData] = useState(null);
