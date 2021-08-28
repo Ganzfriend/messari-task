@@ -27,6 +27,15 @@
 .selectAsset .selectAssetLabels {
   color: #f3f4f6;
   padding: 0.5rem;
+  min-width: 7rem;
+}
+
+.metricsTable {
+  min-width: 30rem;
+}
+
+.chartDiv {
+  min-height: 70vh;
 }
 
 .chart {

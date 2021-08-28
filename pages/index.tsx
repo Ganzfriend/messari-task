@@ -16,7 +16,16 @@ import getTimeSeries from "../helpers/getTimeSeries";
 import getMetrics from "../helpers/getMetrics";
 import getAssetList from "../helpers/getAssetList";
 import Chart from "./chart";
+import MetricsTable from "./metricsTable";
 
+/* TODO:
+
+add metrics data
+
+debug re-render 4 times situation (probably has to do with useEffect)
+
+use paging rather than asset in state in order to change asset?
+*/
 const Home: NextPage = () => {
   const [timeSeriesData, setTimeSeriesData] = useState(null);
   const [assetMetrics, setAssetMetrics] = useState(null);
@@ -34,6 +43,7 @@ const Home: NextPage = () => {
     getAssetList(setAssetList);
   }, [asset]);
 
+  console.log("##index assetMetrics", assetMetrics);
   return (
     <div className={styles.container}>
       <Head>
@@ -60,18 +70,23 @@ const Home: NextPage = () => {
               value={asset}
               onChange={handleChangeAsset}
             >
+              <MenuItem key="yfi" value="yfi">
+                yfi
+              </MenuItem>
               {assetList?.map((val: string) => (
                 <MenuItem key={val} value={val.toLowerCase()}>
                   {val}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText classes={{ root: styles.selectAssetLabels }}>
-              Explore metrics of other assets
-            </FormHelperText>
           </FormControl>
         </div>
-        <div>{timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}</div>
+        <div className={styles.metricsDiv}>
+          {!!assetMetrics && <MetricsTable assetMetrics={assetMetrics} />}
+        </div>
+        <div className={styles.chartDiv}>
+          {timeSeriesData && <Chart timeSeriesData={timeSeriesData} />}
+        </div>
       </main>
 
       {/* <footer className={styles.footer}>

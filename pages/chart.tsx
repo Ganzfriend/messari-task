@@ -47,7 +47,7 @@ const Chart: FC<ComponentProps> = ({ timeSeriesData }) => {
   var lowVals: Array<number> = [];
   var closeVals: Array<number> = [];
 
-  values.forEach((v) => {
+  values?.forEach((v) => {
     timeStamps.push(moment(v[0]).format("lll"));
     openVals.push(v[1]);
     highVals.push(v[2]);
